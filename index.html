@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WCDWatcher — Payment Demo</title>
+</head>
+<body>
+  <h1>Secure Checkout</h1>
+
+  <form action="/pay" method="POST">
+    <label>Card Number:</label>
+    <input type="text" name="card_number" /><br />
+
+    <label>Expiry:</label>
+    <input type="text" name="expiry" /><br />
+
+    <label>CVC:</label>
+    <input type="text" name="cvc" /><br />
+
+    <button type="submit">Pay</button>
+  </form>
+</body>
+</html>
