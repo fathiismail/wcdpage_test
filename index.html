@@ -1,23 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>WCDWatcher — Payment Demo</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WCDWatcher — PCI DSS 6.4.3 Test Page</title>
+
+  <!-- Inline analytics (HEAD, inline) -->
+  <script>
+    // analytics-snippet v1 (inline)
+    window.analyticsQueue = [];
+    function track(event, data) { analyticsQueue.push({ event, data, t: Date.now() }); }
+    track('page_view', { page: location.pathname });
+  </script>
+
+  <!-- Self-hosted core script (HEAD, external, defer) with SRI -->
+  <script src="./assets/js/app-core.js" defer integrity="sha256-yZwuUpDEB2+ux8g2FwskrXPM5xOeJgp8piD//uZOYN0="></script>
+
+  <!-- External CDN script (HEAD, external, async) WITHOUT SRI -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js" async></script>
+
+  <!-- ES module (HEAD, external) with SRI -->
+  <script type="module" src="./assets/js/vendor-utils.js" integrity="sha256-Bl+XiGaey4WvOVhhI1E/kLCahTcadwHzR3EeoXJ1PDU="></script>
 </head>
 <body>
-  <h1>Secure Checkout</h1>
+  <header>
+    <h1>Secure Checkout — Demo</h1>
+    <p>This page intentionally loads a mix of inline, external, module, async/defer, and iframe scripts.</p>
+  </header>
 
-  <form action="/pay" method="POST">
-    <label>Card Number:</label>
-    <input type="text" name="card_number" /><br />
+  <main>
+    <section>
+      <h2>Payment Form</h2>
+      <form action="/pay" method="POST">
+        <label>Card Number:</label>
+        <input type="text" name="card_number" /><br />
 
-    <label>Expiry:</label>
-    <input type="text" name="expiry" /><br />
+        <label>Expiry:</label>
+        <input type="text" name="expiry" /><br />
 
-    <label>CVC:</label>
-    <input type="text" name="cvc" /><br />
+        <label>CVC:</label>
+        <input type="text" name="cvc" /><br />
 
-    <button type="submit">Pay</button>
-  </form>
+        <button type="submit">Pay</button>
+      </form>
+    </section>
+
+    <!-- Inline script (BODY, inline) that injects a new script at runtime -->
+    <script>
+      // dynamic injector (inline)
+      setTimeout(function() {
+        var s = document.createElement('script');
+        s.src = './assets/js/dynamic-loader.js';
+        s.async = true;
+        document.body.appendChild(s);
+      }, 150);
+    </script>
+
+    <!-- Self-hosted script (BODY, external) with SRI -->
+    <script src="./assets/js/afterload.js" integrity="sha256-VVIK+MviQrVldFpPk3/ZWIeLP+e7QCkHFw6007QAc0Q="></script>
+
+    <!-- Iframe that has its own scripts (inline + external) -->
+    <h2>Third-party Widget (iframe)</h2>
+    <iframe src="./assets/iframe.html" title="Widget" width="100%" height="220" style="border:1px solid #ddd;"></iframe>
+  </main>
+
+  <footer>
+    <small>v1 — Use this page to test WCDWatcher’s Script Inventory (PCI DSS 6.4.3).</small>
+  </footer>
 </body>
 </html>
