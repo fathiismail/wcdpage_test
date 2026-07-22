@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WCDWatcher - Changed Checkout Test Page</title>
+
+  <script>
+    // analytics-snippet v2 (inline)
+    window.analyticsQueue = [];
+    function track(event, data) { analyticsQueue.push({ event, data, t: Date.now() }); }
+    track("checkout_view", { page: location.pathname, release: "v2" });
+  </script>
+
+  <script src="./assets/js/app-core.js" defer integrity="sha256-yZwuUpDEB2+ux8g2FwskrXPM5xOeJgp8piD//uZOYN0="></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js" async></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.13/dayjs.min.js" defer></script>
+  <script type="module" src="./assets/js/vendor-utils.js" integrity="sha256-Bl+XiGaey4WvOVhhI1E/kLCahTcadwHzR3EeoXJ1PDU="></script>
+</head>
+<body>
+  <header>
+    <h1>Secure Checkout - Release Candidate</h1>
+    <p>This controlled variant contains visible, DOM, inline-script, and external-script changes.</p>
+  </header>
+
+  <main>
+    <aside id="rotating-banner" data-testid="release-notice">
+      Scheduled maintenance notice for the checkout service.
+    </aside>
+
+    <section>
+      <h2>Payment Details</h2>
+      <form id="payment-form" action="/pay" method="POST">
+        <label>Card Number:</label>
+        <input type="text" name="card_number" autocomplete="off" /><br />
+
+        <label>Expiry:</label>
+        <input type="text" name="expiry" /><br />
+
+        <label>CVC:</label>
+        <input type="text" name="cvc" /><br />
+
+        <label>Currency:</label>
+        <select name="currency">
+          <option>MAD</option>
+          <option>EUR</option>
+        </select><br />
+
+        <button type="submit">Review and pay</button>
+      </form>
+    </section>
+
+    <script>
+      // dynamic injector (inline, release v2)
+      setTimeout(function() {
+        var script = document.createElement("script");
+        script.src = "./assets/js/dynamic-loader.js";
+        script.async = true;
+        script.dataset.release = "v2";
+        document.body.appendChild(script);
+      }, 150);
+    </script>
+
+    <script src="./assets/js/afterload.js" integrity="sha256-VVIK+MviQrVldFpPk3/ZWIeLP+e7QCkHFw6007QAc0Q="></script>
+
+    <h2>Third-party Widget (iframe)</h2>
+    <iframe src="./assets/iframe.html" title="Widget" width="100%" height="220" style="border:1px solid #ddd;"></iframe>
+  </main>
+
+  <footer>
+    <small>v2 - Controlled WCDWatcher change-detection and script-inventory fixture.</small>
+  </footer>
+</body>
+</html>
